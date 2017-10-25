@@ -8,6 +8,8 @@ it takes 2 arguments. 1st one is a string description.
 2nd on is the callback (test) function.
 Then modify the "test" property in package.json.
 Using 'npm test' in the terminal to run the test.
+Using nodemon -x "npm test" to run the test with nodemon
+Using 'npm run test-watch' to run the test
 */
 it('should add two numbers', () => {
   var res = utils.add(33, 11);
