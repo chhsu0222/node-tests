@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/chhsu0222/node-tests#readme",
   "devDependencies": {
+    "expect": "^1.20.2",
     "mocha": "^4.0.1"
   }
 }
