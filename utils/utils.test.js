@@ -23,6 +23,30 @@ it('should add two numbers', () => {
 
 });
 
+/*
+Without the argument 'done', the callback function (the 2nd argument to 'it')
+will return before the async callback gets fired.
+And this is when Mocha thinks your test is done.
+These assertions will never run and the Mocha output has already set
+our test passes before the callback in asyncAdd ever gets fired.
+We need to tell Mocha this is an async test that's going to take time
+with argument 'done'.
+Mocha is not going to finish processing this task until 'done' gets called.
+*/
+it('should async add two numbers', (done) => {
+  utils.asyncAdd(4, 3, (sum) => {
+    expect(sum).toBe(7).toBeA('number');
+    done();
+  });
+});
+
+it('should async square a number', (done) => {
+  utils.asyncSquare(6, (res) => {
+    expect(res).toBe(36).toBeA('number');
+    done();
+  });
+});
+
 it('should square a number', () => {
   var res = utils.square(15);
 
