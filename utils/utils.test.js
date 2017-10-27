@@ -1,56 +1,33 @@
 const expect = require('expect');
 const utils = require('./utils');
 
-/*
-creating a new test case using it, which is a function
-provided by mocha without importing mocha.
-it takes 2 arguments. 1st one is a string description.
-(behavior driven development, a.k.a BDD)
-2nd one is the callback (test) function.
-Then modify the "test" property in package.json.
-Using 'npm test' in the terminal to run the test.
-Using nodemon -x "npm test" to run the test with nodemon
-Using 'npm run test-watch' to run the test
-*/
-it('should add two numbers', () => {
-  var res = utils.add(33, 11);
+// Using describe method to group the tests
+describe('Utils', () => {
+  it('should add two numbers', () => {
+    var res = utils.add(33, 11);
 
-  // using assertion library
-  expect(res).toBe(44).toBeA('number');
-  // if (res !== 44) {
-  //   throw new Error(`Expected 44, but got ${res}.`);
-  // }
-
-});
-
-/*
-Without the argument 'done', the callback function (the 2nd argument to 'it')
-will return before the async callback gets fired.
-And this is when Mocha thinks your test is done.
-These assertions will never run and the Mocha output has already set
-our test passes before the callback in asyncAdd ever gets fired.
-We need to tell Mocha this is an async test that's going to take time
-with argument 'done'.
-Mocha is not going to finish processing this task until 'done' gets called.
-*/
-it('should async add two numbers', (done) => {
-  utils.asyncAdd(4, 3, (sum) => {
-    expect(sum).toBe(7).toBeA('number');
-    done();
+    expect(res).toBe(44).toBeA('number');
   });
-});
 
-it('should async square a number', (done) => {
-  utils.asyncSquare(6, (res) => {
-    expect(res).toBe(36).toBeA('number');
-    done();
+  it('should square a number', () => {
+    var res = utils.square(15);
+
+    expect(res).toBe(225).toBeA('number');
   });
-});
 
-it('should square a number', () => {
-  var res = utils.square(15);
+  it('should async add two numbers', (done) => {
+    utils.asyncAdd(4, 3, (sum) => {
+      expect(sum).toBe(7).toBeA('number');
+      done();
+    });
+  });
 
-  expect(res).toBe(225).toBeA('number');
+  it('should async square a number', (done) => {
+    utils.asyncSquare(6, (res) => {
+      expect(res).toBe(36).toBeA('number');
+      done();
+    });
+  });
 });
 
 it('should set firstName and lastName', () => {
@@ -69,30 +46,3 @@ it('should set firstName and lastName', () => {
     lastName: 'Hsu'
   }).toBeA('object');
 });
-
-// it('should expect some values', () => {
-//   expect(12).toNotBe(11);
-  // for object & array
-  //expect({name: 'CH'}).toBe({name: 'CH'});
-  /*
-  The above result would be fail since these are 2 different
-  objects and 'toBe' uses === to compare the arguments
-  */
-  // 'toEqual' uses is-equal to compare the arguments
-  //expect({name: 'CH'}).toEqual({name: 'CH'});
-
-  /*
-  to check if an array or object includes a certain
-  item or properties.
-  */
-  //expect([2, 3, 4]).toInclude(4);
-  //expect([2, 3, 4]).toExclude(1);
-  // expect({
-  //   name: 'CH',
-  //   age: 30,
-  //   address: 'Taipei'
-  // }).toInclude({
-  //   age: 30
-  // });
-
-// });
